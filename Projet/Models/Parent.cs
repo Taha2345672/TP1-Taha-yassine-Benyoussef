@@ -8,8 +8,6 @@ namespace Projet.Models
 
     {
         [Key] 
-        public int EnfantId { get; set; }
-
         public int ParentId { get; set; }
 
         [Display(Name="Nom du parent")]
