@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container mt-4">
+    <h2>Entité Enfant non trouvée</h2>
+    <p>L'entité enfant que vous recherchez n'a pas pu être trouvée.</p>
+    <p>Peut-être qu'elle n'existe pas ou que l'ID est invalide.</p>
+    <a href="@Url.Action("Recherche")" class="btn btn-primary">Retour à la recherche</a>
+    <a href="@Url.Action("Index", "Parents")" class="btn btn-secondary">Créer un nouvel enfant</a>
+</div>

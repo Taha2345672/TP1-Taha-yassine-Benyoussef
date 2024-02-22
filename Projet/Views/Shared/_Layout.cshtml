@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Votre Site</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-... Votre clé de hachage ..." crossorigin="anonymous" />
+  <link rel="stylesheet" href="/css/style1.css">
+</head>
+
+<body class="body">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img id="Logo" src="/img/Black Aircraft Aviation Logo 2 (1).png" alt="Logo" style="height: 100px;">
+
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link @* active pour la page d'accueil *@`" href="@Url.Action("Index", "Home")" id="accueil">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Recherche", "Enfant")">Recherche</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Detail", "Enfant")">Détails</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("index", "Favoris")">Favoris</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compte
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Connexion</a>
+              <a class="dropdown-item" href="#">Inscription</a>
+            </div>
+          </li>
+        </ul>
+        <div id="lang-selector">
+          <label for="lang">Langue:</label>
+          <select id="lang" name="lang">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+        </div>
+    </div>
+</nav>
+
+                
+
+    <!-- Contenu de la Page d'Accueil -->
+    @RenderSection("HeaderContent", required: false)
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-dark text-white mt-5 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="/img/Création sans titre 2 .png" alt="Logo" class="img-fluid footer-logo">
+                    <br>
+                    <p>Copyright 2021 © Teller company. All right reserved</p>
+                </div>
+                <div class="col-md-4">
+                    <p>COORDONNÉES<br>
+                        5700 Rte de l'Aéroport, Longueuil, QC J3Y 8Y9<br>
+                        +1 514 993 4523<br>
+                        Email@hotmail.ca</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-linkedin"></i>
+                </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

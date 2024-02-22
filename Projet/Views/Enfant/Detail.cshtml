@@ -1,0 +1,34 @@
+﻿@model Projet.Models.Enfant
+
+@{
+    Layout = "_Layout";
+}
+<div class="container mt-4">
+<div class="border p-3 mb-4 bg-primary text-white">
+    <!-- Ajoutez la classe "bg-primary" pour la couleur de fond bleue -->
+    <h2>Plus de details</h2>
+</div>
+
+                <div class="card-body">
+                    <h2 class="card-title">@Model.Nom</h2>
+                    <img src="~/img/@Model.ImageFileName" alt="@Model.Nom" class="img-fluid">
+                    <p class="card-text">Description: @Model.Description</p>
+
+                    <h3 class="card-subtitle mb-2 text-white">Détails :</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-secondary text-white">Année de production: @Model.AnneeProduction</li>
+                        <li class="list-group-item bg-secondary text-white">Type: @Model.Type</li>
+                        <li class="list-group-item bg-secondary text-white">Prix: @Model.Prix</li>
+                        <li class="list-group-item bg-secondary text-white">Prix: @Model.Prix $</li>
+                        <!-- Ajoutez d'autres champs selon vos besoins -->
+                    </ul>
+
+                    <!-- Ajoutez le bouton Favoris avec une icône de cœur et une couleur bleue -->
+                    <button type="button" class="btn btn-primary mt-3" onclick="ajouterFavoris(@Model.Id)">
+                        <i class="fas fa-heart"></i> Ajouter aux favoris
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
