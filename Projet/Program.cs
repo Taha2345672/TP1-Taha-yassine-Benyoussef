@@ -1,11 +1,18 @@
 using Projet.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args); // Crée une web app avec les paramètres envoyés
-builder.Services.AddControllersWithViews(); // Permet MVC
-builder.Services.AddRazorPages(); // Permet utilisation de Razor
+var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<BaseDeDonnees>(); // Permet l'utilisation du Singleton
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+builder.Services.AddSingleton<BaseDeDonnees>();
+
+
+
+// Ajoutez le service AppDbContext avec la configuration de la connexion
+builder.Services.AddDbContext<AppDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -33,6 +40,7 @@ app.UseEndpoints(endpoints =>
 
 app.MapRazorPages();
 app.Run();
+
 
 // Doc
 // Environnements: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?view=aspnetcore-7.0

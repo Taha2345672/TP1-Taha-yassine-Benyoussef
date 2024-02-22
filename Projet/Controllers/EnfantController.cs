@@ -45,7 +45,7 @@ public class EnfantController : Controller
 
     public IActionResult DetailParId(int id)
     {
-        var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.Id == id);
+        var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 
         if (enfant == null)
         {

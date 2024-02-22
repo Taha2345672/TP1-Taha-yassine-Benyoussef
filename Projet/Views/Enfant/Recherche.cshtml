@@ -62,14 +62,14 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card">
                     <!-- Lien autour de l'image pour rediriger vers la page de détails -->
-                    <a href="/Enfant/Detail/@enfant.Id">
+                <a href="/Enfant/Detail/@enfant.EnfantId">
                         <img src="~/img/@enfant.ImageFileName" class="card-img-top" alt="@enfant.Nom">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">@enfant.Nom</h5>
 
                         <!-- Ajoutez le bouton Voir les détails -->
-                        <a href="/Enfant/Detail/@enfant.Id" class="btn btn-primary">Voir les détails</a>
+                    <a href="/Enfant/Detail/@enfant.EnfantId" class="btn btn-primary">Voir les détails</a>
 
                         <!-- Ajoutez le bouton Effacer -->
                         <form method="post" action="@Url.Action("EffacerFiltres", "Enfant")">
