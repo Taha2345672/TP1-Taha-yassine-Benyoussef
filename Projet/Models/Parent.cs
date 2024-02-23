@@ -25,6 +25,12 @@ namespace Projet.Models
         [ValidateNever]
         public List<Enfant> Enfants { get; set; } = new List<Enfant>();
 
-
+        public int NombreEnfants => Enfants.Count;
+        public int NombreEnfantsJet => Enfants.Count(e => e.Type == "Jet");
+        public int NombreEnfantsMonomoteur => Enfants.Count(e => e.Type == "Monomoteur");
+        public int NombreEnfantsLeger => Enfants.Count(e => e.Type == "Léger");
     }
 }
+
+
+    

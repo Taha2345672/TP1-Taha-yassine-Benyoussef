@@ -15,37 +15,42 @@
                     @if (Model.Nom == "CESSNA")
                     {
                         <text>
-                            Cessna est un fabricant américain<br>
-                            Le Cessna 172 produit en 195 <br>
-                            Le Cessna 152 produit en 1977 <br>
-                            Le Cessna 1822 produit en 1956 <br>
-                            Le Cessna Caravan Produit en 1985
+                                Cessna est un fabricant américain<br>
+                                Le Cessna 172 produit en 195 <br>
+                                Le Cessna 152 produit en 1977 <br>
+                                Le Cessna 1822 produit en 1956 <br>
+                                Le Cessna Caravan Produit en 1985
                         </text>
                     }
                     else if (Model.Nom == "PIPER")
                     {
                         <text>
-                            Piper est un fabricant américain<br>
-                            Le Piper PA-28 produit en 1961 <br>
-                            Le Piper PA-24 produit en 1958 <br>
-                            Le Piper Archer produit en 1974 <br>
-                            Le Piper Cherokee produit en 1961
+                                Piper est un fabricant américain<br>
+                                Le Piper PA-28 produit en 1961 <br>
+                                Le Piper PA-24 produit en 1958 <br>
+                                Le Piper Archer produit en 1974 <br>
+                                Le Piper Cherokee produit en 1961
                         </text>
                     }
                     else if (Model.Nom == "CIRRUS")
                     {
                         <text>
-                            Cirrus est un fabricant américain<br>
-                            Le Cirrus SR20 produit en 1999 <br>
-                            Le Cirrus SR22 produit en 2001 <br>
-                            Le Cirrus SR22T produit en 2008 <br>
-                            Le Cirrus SF50 produit en 2016
+                                Cirrus est un fabricant américain<br>
+                                Le Cirrus SR20 produit en 1999 <br>
+                                Le Cirrus SR22 produit en 2001 <br>
+                                Le Cirrus SR22T produit en 2008 <br>
+                                Le Cirrus SF50 produit en 2016
                         </text>
                     }
                 </p>
                 <a href="https://example.com/@Model.Nom" class="btn btn-link text-primary">En savoir plus sur @Model.Nom</a>
+
+                <!-- Ajout des compteurs -->
+                <p>Nombre total d'enfants: @Model.Enfants.Count</p>
+                <p>Nombre d'enfants Jet: @Model.Enfants.Count(e => e.Type == "Jet")</p>
+                <p>Nombre d'enfants Monomoteur: @Model.Enfants.Count(e => e.Type == "Monomoteur")</p>
+                <p>Nombre d'enfants Léger: @Model.Enfants.Count(e => e.Type == "Léger")</p>
             </div>
         </div>
     </div>
 </div>
-
