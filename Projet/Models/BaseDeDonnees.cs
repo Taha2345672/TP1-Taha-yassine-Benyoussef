@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Projet.Models
 {
-    public class BaseDeDonnees
+    public class BaseDeDonnees : DbContext
     {
         public List<Parent> Parents { get; set; } = new List<Parent>();
         public List<Enfant> Enfants { get; set; } = new List<Enfant>();
