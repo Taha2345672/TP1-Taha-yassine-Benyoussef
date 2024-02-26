@@ -16,17 +16,17 @@ public class EnfantController : Controller
     [Route("Enfant/Recherche")]
     public IActionResult Recherche()
     {
-      
+
         var enfants = _baseDeDonnees.Enfants.ToList();
 
-      
+
         var critereRecherche = new CritereRechercheViewModel
         {
-          
+
             Nom = HttpContext.Request.Query["Nom"],
             PrixMin = Convert.ToDecimal(HttpContext.Request.Query["PrixMin"]),
             PrixMax = Convert.ToDecimal(HttpContext.Request.Query["PrixMax"]),
-           
+
         };
 
         // Créez le modèle de vue
@@ -52,7 +52,7 @@ public class EnfantController : Controller
             return View("NotFound");
         }
 
-        return View("Detail",enfant);
+        return View("Detail", enfant);
     }
 
     [HttpGet("enfant/detail/{nom}", Name = "DetailParNom")]
@@ -60,7 +60,7 @@ public class EnfantController : Controller
     [HttpGet("{nom}")]
     public IActionResult DetailParNom(string nom)
     {
-        
+
         nom = nom.ToUpper();
 
         var enfant = _baseDeDonnees.Enfants.FirstOrDefault(e => e.Nom.ToUpper() == nom);
@@ -70,8 +70,6 @@ public class EnfantController : Controller
             return View("NotFound");
         }
 
-        return View("Detail",enfant);
-
+        return View("Detail", enfant);
     }
 }
-

@@ -19,13 +19,13 @@ namespace Projet.Controllers
             return View(parents);
         }
         [HttpGet("parent/ajouter")]
-        public IActionResult AjouterParent()
+        public IActionResult CreateParent()
         {
-            return View(); // Créez une vue pour l'ajout d'un parent
+            return View();
         }
 
-        [HttpPost("parent/ajouter")]
-        public IActionResult AjouterParent(Parent parent)
+        [HttpPost]
+        public IActionResult CreateParent(Parent parent)
         {
             if (ModelState.IsValid)
             {
@@ -37,8 +37,10 @@ namespace Projet.Controllers
             return View(parent);
         }
 
+
         [HttpGet("parent/editer/{id:int}")]
-        public IActionResult EditerParent(int id)
+
+        public IActionResult EditParent(int id)
         {
             var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
 
@@ -50,20 +52,21 @@ namespace Projet.Controllers
             return View(parent);
         }
 
-        [HttpPost("parent/editer/{id:int}")]
-        public IActionResult EditerParent(int id, Parent parent)
+        [HttpPost]
+        public IActionResult EditParent(int id, Parent parent)
         {
             if (ModelState.IsValid)
             {
+                var existingParent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
 
-                if (_baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id) == null)
+                if (existingParent == null)
                 {
                     return View("NotFound");
                 }
 
-               _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id).Nom = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id).Nom;
-                _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id).Description = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id).Description;
-                // Mettez à jour d'autres propriétés selon vos besoins
+                existingParent.Nom = parent.Nom;
+                existingParent.Description = parent.Description;
+                existingParent.ImageFileName = parent.ImageFileName;
 
                 _baseDeDonnees.SaveChanges();
                 return RedirectToAction("Index");
@@ -72,10 +75,26 @@ namespace Projet.Controllers
             return View(parent);
         }
 
+
         [HttpPost("parent/supprimer/{id:int}")]
-        public IActionResult SupprimerParent(int id)
+
+        public IActionResult DeleteParent(int id)
         {
             var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
+
+            if (parent == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(parent);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteParentConfirmed(int id)
+        {
+            var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
+
             if (parent == null)
             {
                 return View("NotFound");
@@ -88,4 +107,5 @@ namespace Projet.Controllers
         }
     }
 }
+
 
