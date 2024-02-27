@@ -1,16 +1,17 @@
-﻿@model Projet.Models.Parent
+﻿+
+@model Projet.Models.Parent
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "UpdateParent";
 }
 
-<h1>Update</h1>
+<h1>UpdateParent</h1>
 
 <h4>Parent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Update">
+        <form asp-action="UpdateParent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ParentId" />
             <div class="form-group">

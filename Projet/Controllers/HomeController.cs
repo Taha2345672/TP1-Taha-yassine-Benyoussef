@@ -37,43 +37,41 @@ namespace Projet.Controllers
             return View(parent);
         }
 
+        [HttpGet("parent/UpdateParent/{id:int}")]
+        public IActionResult UpdateParent(int id)
+{
+    var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
 
-        [HttpGet("parent/editer/{id:int}")]
+    if (parent == null)
+    {
+        return View("NotFound");
+    }
 
-        public IActionResult EditParent(int id)
-        {
-            var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
-
-            if (parent == null)
-            {
-                return View("NotFound");
-            }
-
-            return View(parent);
-        }
-
+    return View(parent);
+}
         [HttpPost]
-        public IActionResult EditParent(int id, Parent parent)
+        public IActionResult UpdateParent(int id, Parent parent)
+{
+    if (ModelState.IsValid)
+    {
+        var existingParent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
+
+        if (existingParent == null)
         {
-            if (ModelState.IsValid)
-            {
-                var existingParent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
-
-                if (existingParent == null)
-                {
-                    return View("NotFound");
-                }
-
-                existingParent.Nom = parent.Nom;
-                existingParent.Description = parent.Description;
-                existingParent.ImageFileName = parent.ImageFileName;
-
-                _baseDeDonnees.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(parent);
+            return View("NotFound");
         }
+
+        existingParent.Nom = parent.Nom;
+        existingParent.Description = parent.Description;
+        existingParent.ImageFileName = parent.ImageFileName;
+
+        _baseDeDonnees.SaveChanges();
+        return RedirectToAction("Index");
+    }
+
+    return View(parent); 
+}
+
 
 
         [HttpPost("parent/supprimer/{id:int}")]
