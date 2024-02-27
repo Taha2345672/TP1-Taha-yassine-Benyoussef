@@ -37,6 +37,8 @@ namespace Projet.Models
         [Display(Name = "Type de l'enfant")]
         public string? Type { get; set; }
 
+        public string ImagePath => $"/img/{ImageFileName}";
+
 
 
 

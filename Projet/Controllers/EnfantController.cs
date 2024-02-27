@@ -109,7 +109,7 @@ public class EnfantController : Controller
     }
 
     [HttpPost("Edition/{id:int}")]
-    public IActionResult Edition(int id, Enfant enfantModifie)
+    public IActionResult update (int id, Enfant enfantModifie)
     {
         var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 
@@ -133,7 +133,7 @@ public class EnfantController : Controller
 
     //  suppression 
     [HttpPost("Suppression/{id:int}")]
-    public IActionResult Suppression(int id)
+    public IActionResult Delete (int id)
     {
         var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 

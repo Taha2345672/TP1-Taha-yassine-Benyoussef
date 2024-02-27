@@ -3,81 +3,51 @@
 @{
     Layout = "_Layout";
 }
+
 <div class="container mt-4">
     <div class="border p-3 mb-4 bg-primary text-white">
-        <!-- Ajoutez la classe "bg-primary" pour la couleur de fond bleue -->
         <h2 class="custom-heading-style">Recherche modele avions</h2>
     </div>
 
-  
+    <a href="@Url.Action("AjouterEnfant", "Enfant")" class="btn btn-success mb-3">
+        <i class="fas fa-plus"></i> Ajouter Enfant
+    </a>
 
     <form method="get" action="@Url.Action("Recherche", "Enfant")">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="Nom">Nom :</label>
-                <input type="text" id="Nom" name="Nom" value="@Model.Criteres.Nom" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="PrixMin">Prix minimum :</label>
-                <input type="number" id="PrixMin" name="PrixMin" value="@Model.Criteres.PrixMin" class="form-control">
-            </div>
-            <div class="col-md-4">
-                <label for="PrixMax">Prix maximum :</label>
-                <input type="number" id="PrixMax" name="PrixMax" value="@Model.Criteres.PrixMax" class="form-control">
-            </div>
-            <div class="col-md-12 mt-2">
-                <button type="submit" class="btn btn-primary">Rechercher</button>
-                <button type="reset" class="btn btn-secondary">Réinitialiser</button>
-
-            </div>
-        </div>
-       <!-- Utilisation de classes Bootstrap pour styliser les checkboxes -->
-        <div class="row mt-2">
-            <div class="col-md-4 form-check">
-                <input type="checkbox" id="Cessna" name="Cessna" class="form-check-input" @(Model.Criteres.AdditionalFilter1 ? "checked" : "")>
-                <label for="Cessna" class="form-check-label">Cessna</label>
-            </div>
-            <div class="col-md-4 form-check">
-                <input type="checkbox" id="Piper" name="Piper" class="form-check-input" @(Model.Criteres.AdditionalFilter2 ? "checked" : "")>
-                <label for="Piper" class="form-check-label">Piper</label>
-            </div>
-            <div class="col-md-4 form-check">
-                <input type="checkbox" id="Cirrus" name="Cirrus" class="form-check-input" @(Model.Criteres.AdditionalFilter1 ? "checked" : "")>
-                <label for="Cirrus" class="form-check-label">Cirrus</label>
-            </div>
-                <label for="EnVedette">Avion en vedette :</label>
-                <select id="EnVedette" name="EnVedette" class="form-control">
-                    <option value="">Peu importe</option>
-                    <option value="true" @(Model.Criteres.EnVedette.HasValue && Model.Criteres.EnVedette.Value ? "selected" : "")>Oui</option>
-                    <option value="false" @(Model.Criteres.EnVedette.HasValue && !Model.Criteres.EnVedette.Value ? "selected" : "")>Non</option>
-                </select>
-            </div>
-        </div>
+        <!-- ... Vos champs de formulaire ici ... -->
     </form>
-
 
     <div class="row mt-4">
         @foreach (var enfant in Model.Resultats)
         {
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                    <!-- Lien autour de l'image pour rediriger vers la page de détails -->
-                <a href="/Enfant/Detail/@enfant.EnfantId">
-                        <img src="~/img/@enfant.ImageFileName" class="card-img-top" alt="@enfant.Nom">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">@enfant.Nom</h5>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <a href="/Enfant/Detail/@enfant.EnfantId">
+                            <img src="~/img/@enfant.ImageFileName" class="card-img-top" alt="@enfant.Nom">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@enfant.Nom</h5>
 
-                        <!-- Ajoutez le bouton Voir les détails -->
-                    <a href="/Enfant/Detail/@enfant.EnfantId" class="btn btn-primary">Voir les détails</a>
+                            <!-- Bouton Voir les détails -->
+                            <a href="/Enfant/Detail/@enfant.EnfantId" class="btn btn-primary">
+                                <i class="fas fa-eye"></i> Voir les détails
+                            </a>
 
-                        <!-- Ajoutez le bouton Effacer -->
-                        <form method="post" action="@Url.Action("EffacerFiltres", "Enfant")">
-                            <button type="submit" class="btn btn-danger">Effacer</button>
-                        </form>
+                            <!-- Bouton Modifier -->
+                            <a href="/Enfant/Editer/@enfant.EnfantId" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Modifier
+                            </a>
+
+                            <!-- Bouton Supprimer -->
+                            <form method="post" action="@Url.Action("Supprimer", "Enfant")">
+                                <input type="hidden" name="enfantId" value="@enfant.EnfantId" />
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
         }
     </div>
 
@@ -86,8 +56,9 @@
             <div class="row mt-4">
                 <div class="col-md-12">
                     <ul class="pagination justify-content-center">
+                        <!-- ... Pagination ici ... -->
                     </ul>
                 </div>
             </div>
     }
-</div>z
+</div>

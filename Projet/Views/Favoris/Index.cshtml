@@ -1,44 +1,47 @@
 ﻿@model List<Projet.Models.Enfant>
 
-<!-- Contenu de la Page des Favoris -->
 <div class="container mt-4">
     <p>Nombre d'éléments en favoris: <strong>@Model.Count</strong></p>
-    <!-- Tableau des Favoris -->
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered table-gray-bg">
-            <!-- Ajoutez la classe table-gray-bg -->
-            <thead class="thead-dark">
-                <tr>
-                    <th>Entité Parent</th>
-                    <th>Entité Enfant</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Utilisation de foreach pour parcourir la liste d'enfants -->
-                @foreach (var enfant in Model)
-                {
-                        <tr>
-                            <td>@enfant.Parent.Nom</td>
-                            <td><a href="@Url.Action("DetailParId", "Enfant", new { id = enfant.EnfantId })">@enfant.Nom</a></td>
-                            <td><img class="img-fluid" src="~/img/@enfant.ImageFileName" alt="@enfant.Nom" class="img-fluid"></td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a href="@Url.Action("DetailParId", "Enfant", new { id = enfant.EnfantId })" class="btn btn-info">
-                                        <i class="fas fa-info-circle"></i> Détails
-                                    </a>
-                                    <a href="@Url.Action("Editer", "Enfant", new { id = enfant.EnfantId })" class="btn btn-primary">
-                                        <i class="fas fa-edit"></i> Modifier
-                                    </a>
-                                    <a href="@Url.Action("Supprimer", "Enfant", new { id = enfant.EnfantId })" class="btn btn-danger">
-                                        <i class="fas fa-trash"></i> Supprimer
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+
+    @if (Model.Count > 0)
+    {
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-gray-bg">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Entité Parent</th>
+                                <th>Entité Enfant</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach (var enfant in Model)
+                    {
+                                        <tr>
+                                            <td>@enfant.IdParent</td>
+                                            <td><a href="detail.html">@enfant.Nom</a></td>
+                                            <td>
+                                                        <img class="img-fluid" src="@enfant.ImagePath" alt="@enfant.Nom"
+                                                     onerror="this.onerror=null; this.src='~/img/default-image.png';">
+                                            </td>
+                                            <td>
+                                                <form onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enfant des favoris?');"
+                                                      action="/Favoris/SupprimerUnEnfant" method="post">
+                                                    <input type="hidden" name="id" value="@enfant.EnfantId">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                    }
+                        </tbody>
+                    </table>
+                </div>
+    }
+    else
+    {
+                <p>Aucun élément en favori pour le moment.</p>
+    }
 </div>
