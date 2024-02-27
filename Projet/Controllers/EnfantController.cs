@@ -72,4 +72,79 @@ public class EnfantController : Controller
 
         return View("Detail", enfant);
     }
+    //  Création 
+    [HttpGet("Creation")]
+    public IActionResult Creation()
+    {
+        return View();
+    }
+
+  
+    [HttpPost("Creation")]
+    public IActionResult Creation(Enfant enfant)
+    {
+        if (ModelState.IsValid)
+        {
+            _baseDeDonnees.Enfants.Add(enfant);
+            _baseDeDonnees.SaveChanges();
+            return RedirectToAction("Recherche"); 
+        }
+
+    
+        return View(enfant);
+    }
+
+    // édition 
+    [HttpGet("Edition/{id:int}")]
+    public IActionResult Edition(int id)
+    {
+        var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
+
+        if (enfant == null)
+        {
+            return View("NotFound");
+        }
+
+        return View(enfant);
+    }
+
+    [HttpPost("Edition/{id:int}")]
+    public IActionResult Edition(int id, Enfant enfantModifie)
+    {
+        var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
+
+        if (enfant == null)
+        {
+            return View("NotFound");
+        }
+
+        if (ModelState.IsValid)
+        {
+            
+            enfant.Nom = enfantModifie.Nom;
+            enfant.Prix = enfantModifie.Prix;
+            _baseDeDonnees.SaveChanges();
+            return RedirectToAction("Recherche"); 
+        }
+
+       
+        return View(enfant);
+    }
+
+    //  suppression 
+    [HttpPost("Suppression/{id:int}")]
+    public IActionResult Suppression(int id)
+    {
+        var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
+
+        if (enfant == null)
+        {
+            return View("NotFound");
+        }
+
+        _baseDeDonnees.Enfants.Remove(enfant);
+        _baseDeDonnees.SaveChanges();
+
+        return RedirectToAction("Recherche"); // Redirige vers la liste des enfants après la suppression
+    }
 }
