@@ -72,27 +72,36 @@ public class EnfantController : Controller
 
         return View("Detail", enfant);
     }
-    //  Création 
-    [HttpGet("Creation")]
-    public IActionResult Creation()
-    {
-        return View();
-    }
-
-  
     [HttpPost("Creation")]
     public IActionResult Creation(Enfant enfant)
     {
-        if (ModelState.IsValid)
+        try
         {
-            _baseDeDonnees.Enfants.Add(enfant);
-            _baseDeDonnees.SaveChanges();
-            return RedirectToAction("Recherche"); 
+            if (ModelState.IsValid)
+            {
+                if (_baseDeDonnees.Enfants.Any(e => e.EnfantId == enfant.EnfantId))
+                {
+                    // L'enfant avec cet ID existe déjà, vous pouvez traiter cela en conséquence.
+                    // Peut-être une redirection vers une vue d'erreur.
+                    return RedirectToAction("Erreur", "Enfant");
+                }
+
+                _baseDeDonnees.Enfants.Add(enfant);
+                _baseDeDonnees.SaveChanges();
+                return RedirectToAction("Recherche");
+            }
+        }
+        catch (Exception ex)
+        {
+            // Loguez l'exception pour un débogage ultérieur.
+            Console.WriteLine(ex.Message);
+            // Vous pouvez rediriger vers une vue d'erreur ou effectuer d'autres actions.
+            return RedirectToAction("Erreur", "Enfant");
         }
 
-    
         return View(enfant);
     }
+
 
     // édition 
     [HttpGet("Edition/{id:int}")]

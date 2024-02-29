@@ -18,7 +18,7 @@ namespace Projet.Controllers
 
             return View(parents);
         }
-        [HttpGet("parent/ajouter")]
+       // [HttpGet("parent/ajouter")]
         public IActionResult CreateParent()
         {
             return View();
