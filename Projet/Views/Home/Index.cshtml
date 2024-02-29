@@ -7,7 +7,7 @@
 
     <!-- Bouton Ajouter Parent pour l'ensemble de la page -->
     <div class="d-flex justify-content-end mt-3">
-        <a href="@Url.Action("CreateParent", "Home")" class="btn btn-success">
+        <a asp-controller="Home" asp-action="CreateParent" class="btn btn-success">
             <i class="fas fa-plus"></i> Ajouter Parent
         </a>
     </div>
@@ -16,7 +16,7 @@
         <!-- Utilisation de la vue partielle pour chaque parent -->
         @foreach (var parent in Model)
         {
-            @Html.Partial("_MarqueAvionPartial", parent)
+                <partial name="_MarqueAvionPartial" model="parent" />
         }
     </div>
 </div>

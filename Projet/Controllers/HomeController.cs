@@ -74,7 +74,7 @@ namespace Projet.Controllers
 
 
 
-        [HttpPost("parent/supprimer/{id:int}")]
+       
 
         public IActionResult DeleteParent(int id)
         {
