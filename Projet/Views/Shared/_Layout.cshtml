@@ -2,65 +2,63 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Votre Site</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-... Votre clé de hachage ..." crossorigin="anonymous" />
-  <link rel="stylesheet" href="/css/style1.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre Site</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-... Votre clé de hachage ..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="/css/style1.css">
 </head>
 
 <body class="body">
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img id="Logo" src="/img/Black Aircraft Aviation Logo 2 (1).png" alt="Logo" style="height: 100px;">
-
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link @* active pour la page d'accueil *@`" href="@Url.Action("Index", "Home")" id="accueil">Accueil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Recherche", "Enfant")">Recherche</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Detail", "Enfant")">Détails</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("index", "Favoris")">Favoris</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Compte
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img id="Logo" src="/img/Black Aircraft Aviation Logo 2 (1).png" alt="Logo" style="height: 100px;">
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Connexion</a>
-              <a class="dropdown-item" href="#">Inscription</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index" id="accueil">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Enfant" asp-action="Recherche">Recherche</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Enfant" asp-action="Detail">Détails</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Favoris" asp-action="Index">Favoris</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Compte
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Connexion</a>
+                            <a class="dropdown-item" href="#">Inscription</a>
+                        </div>
+                    </li>
+                </ul>
+                <div id="lang-selector">
+                    <label for="lang">Langue:</label>
+                    <select id="lang" name="lang">
+                        <option value="fr">FR</option>
+                        <option value="en">EN</option>
+                    </select>
+                </div>
             </div>
-          </li>
-        </ul>
-        <div id="lang-selector">
-          <label for="lang">Langue:</label>
-          <select id="lang" name="lang">
-            <option value="fr">FR</option>
-            <option value="en">EN</option>
-          </select>
         </div>
-        </div>
-    </div>
-</nav>
-
-                
+    </nav>   
 
     <!-- Contenu de la Page d'Accueil -->
-    @RenderSection("HeaderContent", required: false)
+    @RenderSection("Scripts", required: false)
+
 
     <main>
         @RenderBody()
@@ -89,9 +87,13 @@
                 </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+
 
 </body>
 

@@ -1,63 +1,22 @@
-﻿@{
-    Layout = "_Layout";
-}
+﻿@model List<Projet.Models.Parent>
 
 <div class="container mt-4">
     <div class="border p-3 mb-4 bg-primary text-white">
-        <!-- Ajoutez la classe "bg-primary" pour la couleur de fond bleue -->
         <h2>Marque avions</h2>
     </div>
 
+    <!-- Bouton Ajouter Parent pour l'ensemble de la page -->
+    <div class="d-flex justify-content-end mt-3">
+        <a asp-controller="Home" asp-action="CreateParent" class="btn btn-success">
+            <i class="fas fa-plus"></i> Ajouter Parent
+        </a>
+    </div>
+
     <div class="row">
+        <!-- Utilisation de la vue partielle pour chaque parent -->
         @foreach (var parent in Model)
         {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <a href="@Url.Action("Recherche", "Enfant")" class="btn btn-link">
-                        <img src="~/img/@parent.ImageFileName" class="card-img-top" alt="Image du parent">
-                    </a>
-                    <div class="card-body">
-                        <h5 class="card-title">@parent.Nom</h5>
-                        <p class="card-text">@parent.Description</p>
-                        <div class="parent-description">
-                            <h4>A propos de @parent.Nom :</h4>
-                            <p>
-                                @if (parent.Nom == "CESSNA")
-                                {
-                                    <text>
-                                        Cessna est un fabricant américain<br>
-                                        Le Cessna 172 produit en 195 <br>
-                                        Le Cessna 152 produit en 1977 <br>
-                                        Le Cessna 1822 produit en 1956 <br>
-                                        Le Cessna Caravan Produit en 1985
-                                    </text>
-                                }
-                                else if (parent.Nom == "PIPER")
-                                {
-                                    <text>
-                                        Piper est un fabricant américain<br>
-                                        Le Piper PA-28 produit en 1961 <br>
-                                        Le Piper PA-24 produit en 1958 <br>
-                                        Le Piper Archer produit en 1974 <br>
-                                        Le Piper Cherokee produit en 1961
-                                    </text>
-                                }
-                                else if (parent.Nom == "CIRRUS")
-                                {
-                                    <text>
-                                        Cirrus est un fabricant américain<br>
-                                        Le Cirrus SR20 produit en 1999 <br>
-                                        Le Cirrus SR22 produit en 2001 <br>
-                                        Le Cirrus SR22T produit en 2008 <br>
-                                        Le Cirrus SF50 produit en 2016
-                                    </text>
-                                }
-                            </p>
-                            <a href="https://example.com/@parent.Nom" class="btn btn-link text-primary">En savoir plus sur @parent.Nom</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <partial name="_MarqueAvionPartial" model="parent" />
         }
     </div>
 </div>

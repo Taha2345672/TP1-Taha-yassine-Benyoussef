@@ -1,66 +1,47 @@
 ﻿@model List<Projet.Models.Enfant>
 
-<!-- Contenu de la Page des Favoris -->
 <div class="container mt-4">
-    <p>Nombre d'éléments en favoris: <strong>4</strong></p>
-    <!-- Tableau des Favoris -->
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered table-gray-bg">
-            <!-- Ajoutez la classe table-gray-bg -->
-            <thead class="thead-dark">
-                <tr>
-                    <th>Entité Parent</th>
-                    <th>Entité Enfant</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Ligne 1 -->
-                <tr>
-                    <td>Cirrus</td>
-                    <td><a href="detail.html">Cessna 182</a></td>
-                    <td><img class="img-fluid" src="img/CESSNA 182 1.png" alt="Cessna 182" class="img-fluid"></td>
-                    <td>
-                        <form action="https://www.w3schools.com/action_page.php" method="post">
-                            <input type="hidden" name="nom" value="cessna c182">
-                            <button type="submit" class="btn btn-link">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+    <p>Nombre d'éléments en favoris: <strong>@Model.Count</strong></p>
 
-                <!-- Ligne 2 -->
-                <tr>
-                    <td>Piper</td>
-                    <td><a href="detail.html">Piper PA-28</a></td>
-                    <td><img class="img-fluid" src="img/PIPER.png" alt="Piper PA-28"></td>
-                    <td>
-                        <form action="https://www.w3schools.com/action_page.php" method="post">
-                            <input type="hidden" name="nom" value="Piper PA-28">
-                            <button type="submit" class="btn btn-link">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-
-                <!-- Ligne 3 -->
-                <tr>
-                    <td>Cirrus</td>
-                    <td><a href="detail.html">Cessna 172</a></td>
-                    <td><img class="img-fluid" src="img/SR22 1.png" alt="Cessna 172"></td>
-                    <td>
-                        <form action="https://www.w3schools.com/action_page.php" method="post">
-                            <input type="hidden" name="nom" value="Cessna 172">
-                            <button type="submit" class="btn btn-link">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    @if (Model.Count > 0)
+    {
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-gray-bg">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Entité Parent</th>
+                                <th>Entité Enfant</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                    @foreach (var enfant in Model)
+                    {
+                                        <tr>
+                                            <td>@enfant.IdParent</td>
+                                            <td><a href="detail.html">@enfant.Nom</a></td>
+                                            <td>
+                                                        <img class="img-fluid" src="@enfant.ImagePath" alt="@enfant.Nom"
+                                                     onerror="this.onerror=null; this.src='~/img/default-image.png';">
+                                            </td>
+                                            <td>
+                                                <form onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet enfant des favoris?');"
+                                                      action="/Favoris/SupprimerUnEnfant" method="post">
+                                                    <input type="hidden" name="id" value="@enfant.EnfantId">
+                                                    <button type="submit" class="btn btn-link">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                    }
+                        </tbody>
+                    </table>
+                </div>
+    }
+    else
+    {
+                <p>Aucun élément en favori pour le moment.</p>
+    }
 </div>

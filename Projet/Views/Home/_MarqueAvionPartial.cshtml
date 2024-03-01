@@ -1,0 +1,72 @@
+﻿@model Projet.Models.Parent
+
+<!-- Contenu de la Page des Parents -->
+<div class="col-md-4 mb-4">
+    <div class="card">
+        <a asp-controller="Enfant" asp-action="Recherche" class="btn btn-link">
+            <img src="~/img/@Model.ImageFileName" class="card-img-top" alt="Image du parent">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Nom</h5>
+            <p class="card-text">@Model.Description</p>
+            <div class="parent-description">
+                <h4>A propos de @Model.Nom :</h4>
+                <p>
+                    <!-- Ajoutez vos conditions ici -->
+                    @if (Model.Nom == "CESSNA")
+                    {
+                        <text>
+                                Cessna est un fabricant américain<br>
+                                Le Cessna 172 produit en 195 <br>
+                                Le Cessna 152 produit en 1977 <br>
+                                Le Cessna 1822 produit en 1956 <br>
+                                Le Cessna Caravan Produit en 1985
+                        </text>
+                    }
+                    else if (Model.Nom == "PIPER")
+                    {
+                        <text>
+                                Piper est un fabricant américain<br>
+                                Le Piper PA-28 produit en 1961 <br>
+                                Le Piper PA-24 produit en 1958 <br>
+                                Le Piper Archer produit en 1974 <br>
+                                Le Piper Cherokee produit en 1961
+                        </text>
+                    }
+                    else if (Model.Nom == "CIRRUS")
+                    {
+                        <text>
+                                Cirrus est un fabricant américain<br>
+                                Le Cirrus SR20 produit en 1999 <br>
+                                Le Cirrus SR22 produit en 2001 <br>
+                                Le Cirrus SR22T produit en 2008 <br>
+                                Le Cirrus SF50 produit en 2016
+                        </text>
+                    }
+                </p>
+                <a href="https://example.com/@Model.Nom" class="btn btn-link text-primary">En savoir plus sur @Model.Nom</a>
+
+                <!-- Ajout des compteurs -->
+                <p>Nombre total d'enfants: @Model.Enfants.Count</p>
+                <p>Nombre d'enfants Jet: @Model.Enfants.Count(e => e.Type == "Jet")</p>
+                <p>Nombre d'enfants Monomoteur: @Model.Enfants.Count(e => e.Type == "Monomoteur")</p>
+                <p>Nombre d'enfants Léger: @Model.Enfants.Count(e => e.Type == "Léger")</p>
+
+                <!-- Boutons d'actions spécifiques au parent -->
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <a asp-controller="Home" asp-action="EditParent" asp-route-id="@Model.ParentId" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+
+                    <!-- Formulaire de suppression -->
+                    <form asp-controller="Home" asp-action="DeleteParent">
+                        <input type="hidden" name="id" value="@Model.ParentId" />
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
