@@ -1,29 +1,27 @@
 ﻿@model Projet.ViewModels.PageRechercheViewModel
 
-@{
-    Layout = "_Layout";
-}
-
 <div class="container mt-4">
     <div class="border p-3 mb-4 bg-primary text-white">
         <h2 class="custom-heading-style">Recherche modele avions</h2>
     </div>
 
-    <a href="@Url.Action("CreateEnfant", "Enfant")" class="btn btn-success mb-3">
-        <i class="fas fa-plus"></i> Ajouter Enfant
-    </a>
+    <!-- Formulaire pour ajouter un enfant -->
+    <form asp-action="CreateEnfant" method="get">
+        <button type="submit" class="btn btn-success mb-3">
+            <i class="fas fa-plus"></i> Ajouter Enfant
+        </button>
+    </form>
 
     <form method="get" action="@Url.Action("Recherche", "Enfant")">
         <!-- ... Vos champs de formulaire ici ... -->
     </form>
 
-   <div class="row mt-4">
+    <div class="row mt-4">
         @foreach (var enfant in Model.Resultats)
         {
             @Html.Partial("_EnfantCardPartial", enfant)
         }
-</div>
-
+    </div>
 
     @if (Model.Criteres.ParentFilter)
     {
@@ -36,3 +34,4 @@
             </div>
     }
 </div>
+
