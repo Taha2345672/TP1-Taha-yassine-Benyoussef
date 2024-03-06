@@ -6,37 +6,72 @@ using System.Linq;
 public class EnfantController : Controller
 {
     private readonly BaseDeDonnees _baseDeDonnees;
+    private List<Enfant> enfant;
 
     public EnfantController(BaseDeDonnees baseDeDonnees)
     {
         _baseDeDonnees = baseDeDonnees;
     }
 
-    // Emplacement : Projet/Controllers/EnfantController.cs
     [Route("Enfant/Recherche")]
-    public IActionResult Recherche()
+    public IActionResult Recherche(CritereRechercheViewModel critereRecherche)
+
+
     {
 
-        var enfants = _baseDeDonnees.Enfants.ToList();
 
 
-        var critereRecherche = new CritereRechercheViewModel
+        IEnumerable<Enfant> enfants = _baseDeDonnees.Enfants.ToList();
+
+
+        if (!string.IsNullOrEmpty(critereRecherche.Nom))
         {
+            enfants = enfants.Where(e => e.Nom.Contains(critereRecherche.Nom)).ToList();
+        }
 
-            Nom = HttpContext.Request.Query["Nom"],
-            PrixMin = Convert.ToDecimal(HttpContext.Request.Query["PrixMin"]),
-            PrixMax = Convert.ToDecimal(HttpContext.Request.Query["PrixMax"]),
+        if (critereRecherche.PrixMin.HasValue)
+        {
+            enfants = enfants.Where(e => e.Prix >= critereRecherche.PrixMin).ToList();
+        }
 
-        };
+        if (critereRecherche.PrixMax.HasValue)
+        {
+            enfants = enfants.Where(e => e.Prix <= critereRecherche.PrixMax).ToList();
+        }
 
-        // Créez le modèle de vue
+
+        if (critereRecherche.AdditionalFilter1)
+        {
+            enfants = enfants.Where(e => e.IdParent == 1);
+        }
+
+
+        if (critereRecherche.AdditionalFilter2)
+        {
+            enfants = enfants.Where(e => e.IdParent == 2);
+        }
+
+
+        if (critereRecherche.AdditionalFilter3)
+        {
+            enfants = enfants.Where(e => e.IdParent == 3);
+        }
+
+        if (!critereRecherche.EnVedette.HasValue)
+        {
+        }
+        else
+        {
+            enfants = enfants.Where(e => e.EnVedette == critereRecherche.EnVedette.Value).ToList();
+        }
+
+
         var viewModel = new PageRechercheViewModel
         {
-            Resultats = enfants,
+            Resultats = (List<Enfant>)enfants,
             Criteres = critereRecherche
         };
 
-        // Retournez la vue avec le modèle de vue
         return View(viewModel);
     }
 
@@ -71,8 +106,10 @@ public class EnfantController : Controller
         }
 
         return View("Detail", enfant);
+
     }
-    [HttpPost("Creation")]
+
+[HttpPost("Creation")]
     public IActionResult Creation(Enfant enfant)
     {
         try

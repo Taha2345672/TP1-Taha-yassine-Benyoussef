@@ -39,6 +39,9 @@ namespace Projet.Models
 
         public string ImagePath => $"/img/{ImageFileName}";
 
+        public bool EnVedette { get; set; }
+
+
 
 
 

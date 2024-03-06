@@ -12,8 +12,50 @@
         </button>
     </form>
 
-    <form method="get" action="@Url.Action("Recherche", "Enfant")">
-        <!-- ... Vos champs de formulaire ici ... -->
+    <form method="get" action="@Url.Action("Recherche", "Enfant")" class="border rounded p-4 bg-secondary text-white">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="Nom">Nom :</label>
+                <input type="text" id="Nom" name="Nom" value="@Model.Criteres.Nom" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label for="PrixMin">Prix minimum :</label>
+                <input type="number" id="PrixMin" name="PrixMin" value="@Model.Criteres.PrixMin" class="form-control">
+            </div>
+            <div class="col-md-4">
+                <label for="PrixMax">Prix maximum :</label>
+                <input type="number" id="PrixMax" name="PrixMax" value="@Model.Criteres.PrixMax" class="form-control">
+            </div>
+            <div class="col-md-12 mt-2">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+                <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4 form-check">
+                <input type="checkbox" id="Cessna" name="Cessna" class="form-check-input" value="true" @(Model.Criteres.AdditionalFilter1 ? "checked" : "")>
+                <label for="Cessna" class="form-check-label">Cessna</label>
+            </div>
+            <div class="col-md-4 form-check">
+                <input type="checkbox" id="Piper" name="Piper" class="form-check-input" value="true" @(Model.Criteres.AdditionalFilter2 ? "checked" : "")>
+                <label for="Piper" class="form-check-label">Piper</label>
+            </div>
+            <div class="col-md-4 form-check">
+                <input type="checkbox" id="Cirrus" name="Cirrus" class="form-check-input" value="true" @(Model.Criteres.AdditionalFilter3 ? "checked" : "")>
+                <label for="Cirrus" class="form-check-label">Cirrus</label>
+            </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+            <label for="EnVedette">Avion en vedette :</label>
+            <select id="EnVedette" name="EnVedette" class="form-control">
+                <option value="">Peu importe</option>
+                <option value="true" selected="@(Model.Criteres.EnVedette.HasValue && Model.Criteres.EnVedette.Value)">Oui</option>
+<option value="false" selected="@(Model.Criteres.EnVedette.HasValue && !Model.Criteres.EnVedette.Value)">Non</option>
+
+            </select>
+        </div>
     </form>
 
     <div class="row mt-4">
