@@ -5,12 +5,11 @@
         <h2 class="custom-heading-style">Recherche modele avions</h2>
     </div>
 
-    <!-- Formulaire pour ajouter un enfant -->
-    <form asp-action="CreateEnfant" method="get">
-        <button type="submit" class="btn btn-success mb-3">
-            <i class="fas fa-plus"></i> Ajouter Enfant
-        </button>
-    </form>
+   <form asp-action="CreateEnfant" method="get">
+    <button type="submit" class="btn btn-success mb-3">
+        <i class="fas fa-plus"></i> Ajouter Enfant
+    </button>
+</form>
 
     <form method="get" action="@Url.Action("Recherche", "Enfant")" class="border rounded p-4 bg-secondary text-white">
         <div class="row">
