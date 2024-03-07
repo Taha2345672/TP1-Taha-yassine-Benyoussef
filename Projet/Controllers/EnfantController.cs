@@ -109,21 +109,28 @@ public class EnfantController : Controller
 
     }
 
-[HttpPost("Creation")]
-    public IActionResult Creation(Enfant enfant)
+    [HttpGet("CreationEnfant")]
+    public IActionResult CreateEnfant()
+    {
+        // Logique pour la création d'un nouvel enfant
+        return View();
+    }
+
+    [HttpPost("CreationEnfant")]
+    public IActionResult CreateEnfant(Enfant nouvelEnfant)
     {
         try
         {
             if (ModelState.IsValid)
             {
-                if (_baseDeDonnees.Enfants.Any(e => e.EnfantId == enfant.EnfantId))
+                if (_baseDeDonnees.Enfants.Any(e => e.EnfantId == nouvelEnfant.EnfantId))
                 {
                     // L'enfant avec cet ID existe déjà, vous pouvez traiter cela en conséquence.
                     // Peut-être une redirection vers une vue d'erreur.
                     return RedirectToAction("Erreur", "Enfant");
                 }
 
-                _baseDeDonnees.Enfants.Add(enfant);
+                _baseDeDonnees.Enfants.Add(nouvelEnfant);
                 _baseDeDonnees.SaveChanges();
                 return RedirectToAction("Recherche");
             }
@@ -136,13 +143,12 @@ public class EnfantController : Controller
             return RedirectToAction("Erreur", "Enfant");
         }
 
-        return View(enfant);
+        return View(nouvelEnfant);
     }
 
 
-    // édition 
-    [HttpGet("Edition/{id:int}")]
-    public IActionResult Edition(int id)
+    [HttpGet("Enfant/UpdateEnfant/{id:int}")]
+    public IActionResult UpdateEnfant(int id)
     {
         var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 
@@ -154,8 +160,8 @@ public class EnfantController : Controller
         return View(enfant);
     }
 
-    [HttpPost("Edition/{id:int}")]
-    public IActionResult update (int id, Enfant enfantModifie)
+    [HttpPost("Enfant/UpdateEnfant/{id:int}")]
+    public IActionResult UpdateEnfant(int id, Enfant enfantModifie)
     {
         var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 
@@ -166,20 +172,16 @@ public class EnfantController : Controller
 
         if (ModelState.IsValid)
         {
-            
             enfant.Nom = enfantModifie.Nom;
             enfant.Prix = enfantModifie.Prix;
             _baseDeDonnees.SaveChanges();
-            return RedirectToAction("Recherche"); 
+            return RedirectToAction("Recherche");
         }
 
-       
         return View(enfant);
     }
-
-    //  suppression 
-    [HttpPost("Suppression/{id:int}")]
-    public IActionResult Delete (int id)
+    [HttpPost("Enfant/DeleteEnfant/{id:int}")]
+    public IActionResult DeleteEnfant(int id)
     {
         var enfant = _baseDeDonnees.Enfants.SingleOrDefault(e => e.EnfantId == id);
 
@@ -191,6 +193,6 @@ public class EnfantController : Controller
         _baseDeDonnees.Enfants.Remove(enfant);
         _baseDeDonnees.SaveChanges();
 
-        return RedirectToAction("Recherche"); // Redirige vers la liste des enfants après la suppression
+        return RedirectToAction("Recherche");
     }
 }
