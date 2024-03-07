@@ -39,42 +39,44 @@ namespace Projet.Controllers
 
         [HttpGet("parent/UpdateParent/{id:int}")]
         public IActionResult UpdateParent(int id)
-{
-    var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
-
-    if (parent == null)
-    {
-        return View("NotFound");
-    }
-
-    return View(parent);
-}
-        [HttpPost]
-        public IActionResult UpdateParent(int id, Parent parent)
-{
-    if (ModelState.IsValid)
-    {
-        var existingParent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
-
-        if (existingParent == null)
         {
-            return View("NotFound");
+            var parent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
+
+            if (parent == null)
+            {
+                return View("NotFound");
+            }
+
+            return View(parent);
         }
 
-        existingParent.Nom = parent.Nom;
-        existingParent.Description = parent.Description;
-        existingParent.ImageFileName = parent.ImageFileName;
+        [HttpPost]
+        public IActionResult UpdateParent(int id, Parent updatedParent)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingParent = _baseDeDonnees.Parents.FirstOrDefault(p => p.ParentId == id);
 
-        _baseDeDonnees.SaveChanges();
-        return RedirectToAction("Index");
-    }
+                if (existingParent == null)
+                {
+                    return View("NotFound");
+                }
 
-    return View(parent); 
-}
+                existingParent.Nom = updatedParent.Nom;
+                existingParent.Description = updatedParent.Description;
+                existingParent.ImageFileName = updatedParent.ImageFileName;
+
+                _baseDeDonnees.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(updatedParent);
+        }
 
 
 
-       
+
+
 
         public IActionResult DeleteParent(int id)
         {
